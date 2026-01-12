@@ -12,9 +12,6 @@ class UserController extends AbstractController
     public function __construct(AltoRouter $router)
     {
         parent::__construct($router);
-        if (!isset($_SESSION['user_id'])) {
-            exit;
-        }
     }
 
     public function home(): void

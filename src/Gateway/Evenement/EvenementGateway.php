@@ -25,28 +25,28 @@ class EvenementGateway
         $tab_evenements = [];
         foreach ($result as $row)
         {
-            $tab_evenements[] = new Evenement($row['id'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
+            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
         }
         return $tab_evenements;
     }
 
     public function findById(int $id): array
     {
-        $query = "SELECT * FROM evenement WHERE id = :id";
+        $query = "SELECT * FROM evenement WHERE id_evenement = :id";
         $this->db->executeQuery($query,[':id' =>[$id, PDO::PARAM_INT] ] );
 
         $results = $this->db->getResults();
 
         $tab_evenements = [];
         foreach ($results as $row){
-            $tab_evenements[] = new Evenement($row['id'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
+            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
         }
         return $tab_evenements;
     }
 
     public function insert(string $titre, string $description, string $dateDebut, string $dateFin, string $prix): bool
     {
-    $query = "INSERT INTO evenement (id, titre, prix, description, date_debut, date_fin) VALUES (id, :titre, :prix, :description, :date_debut, :date_fin)";
+    $query = "INSERT INTO evenement (id_evenement, titre, prix, description, date_debut, date_fin) VALUES (:id, :titre, :prix, :description, :date_debut, :date_fin)";
         return $this->db->executeQuery($query, [
             ':titre' => [$titre, PDO::PARAM_STR],
             ':description' => [$description, PDO::PARAM_STR],

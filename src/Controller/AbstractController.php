@@ -35,18 +35,24 @@ abstract class AbstractController
         $this->twig->addGlobal('current_route', $match ? $match['name'] : null);
 
         $config = require BASE_PATH . '/config/database.php';
-
-        try {
-            // PostgreSQL DSN
-            $dsn = sprintf(
-                'pgsql:host=%s;port=%d;dbname=%s',
-                $config['host'],
-                $config['port'],
-                $config['dbname']
-            );
+        
+        $dsn='mysql:host='.$config['host'].';port='.$config['port'].';dbname='.$config['dbname'];
 
             $this->db = new Connection($dsn, $config['user'], $config['password']);
+            
+        try {
+                        // PostgreSQL DSN
+            /* $dsn = sprintf( */
+            /*     'pgsql:host=%s;port=%d;dbname=%s', */
+            /*     $config['host'], */
+            /*     $config['port'], */
+            /*     $config['dbname'] */
+            /* ); */
+
+            // MySql DSN
+            
         } catch (PDOException $e) {
+            throw e;
             echo $this->twig->render('error/db_error.html.twig');
             die();
         }
