@@ -1,0 +1,58 @@
+<?php
+
+namespace Poussinade\Gateway\Evenement;
+
+use Poussinade\Entity\Evenement;
+use Poussinade\Model\Connection;
+use PDO;
+
+class EvenementGateway
+{
+    private Connection $db;
+
+    public function __construct(Connection $db)
+    {
+        $this->db = $db;
+    }
+
+    public function listAll(): array
+    {
+        $query = "SELECT * FROM evenement";
+        $this->db->executeQuery($query);
+
+        $result = $this->db->getResults();
+
+        $tab_evenements = [];
+        foreach ($result as $row)
+        {
+            $tab_evenements[] = new Evenement($row['id'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
+        }
+        return $tab_evenements;
+    }
+
+    public function findById(int $id): array
+    {
+        $query = "SELECT * FROM evenement WHERE id = :id";
+        $this->db->executeQuery($query,[':id' =>[$id, PDO::PARAM_INT] ] );
+
+        $results = $this->db->getResults();
+
+        $tab_evenements = [];
+        foreach ($results as $row){
+            $tab_evenements[] = new Evenement($row['id'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
+        }
+        return $tab_evenements;
+    }
+
+    public function insert(string $titre, string $description, string $dateDebut, string $dateFin, string $prix): bool
+    {
+    $query = "INSERT INTO evenement (id, titre, prix, description, date_debut, date_fin) VALUES (id, :titre, :prix, :description, :date_debut, :date_fin)";
+        return $this->db->executeQuery($query, [
+            ':titre' => [$titre, PDO::PARAM_STR],
+            ':description' => [$description, PDO::PARAM_STR],
+            ':date_debut' => [$dateDebut, PDO::PARAM_STR],
+            ':date_fin' => [$dateFin, PDO::PARAM_STR],
+            ':prix' => [$prix, PDO::PARAM_INT]
+        ]);
+    }
+}

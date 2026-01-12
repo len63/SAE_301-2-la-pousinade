@@ -1,0 +1,6 @@
+/.idea/
+/vendor/
+.php-cs-fixer.cache
+composer.phar
+/uploads/pictures/
+!uploads/default_pfp.jpg

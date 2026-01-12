@@ -1,0 +1,53 @@
+{% extends "user.html.twig" %}
+
+{% block title %}Poussinade - Evenements{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/pages/main.css">
+{% endblock %}
+
+{% block content %}
+    <div class="evenements-container" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        {% for t in evenements %}
+            <div class="evenement-item" style="flex: 0 1 200px;"> {# adjust width as needed #}
+                {% include 'components/evenement.html.twig' with {
+                    id: t['evenement'].id,
+                    titre: t['evenement'].titre,
+                    description: t['evenement'].description,
+                    prix: t['evenement'].prix,
+                    dateDebut: t['evenement'].dateDebut,
+                    dateFin: t['evenement'].dateFin
+                } %}
+            </div>
+        {% else %}
+            <p>Pas d'evenements</p> 
+        {% endfor %}
+        <a class="btn btn-default" href="{{ path('addEvenementToDatabase') }}">{{ svg('plus') }} Ajouter un evenement</a>
+    </div>
+
+    {% if message or error %}
+        <dialog id="feedback-dialog" class="feedback-dialog">
+            <div class="dialog-content">
+                <h3 class="{{ error ? 'error-title' : 'success-title' }}">
+                    {{ error ? 'Erreur' : 'Succès' }}
+                </h3>
+                <p>{{ error ?? message }}</p>
+                <button class="btn" id="close-dialog">Fermer</button>
+            </div>
+        </dialog>
+    {% endif %} 
+
+<!-- {% if popup_error %} -->
+<!--     <dialog id="feedback-dialog" class="feedback-dialog" open> -->
+<!--         <div class="dialog-content"> -->
+<!--             <h3 class="error-title"> -->
+<!--                 Erreur -->
+<!--             </h3> -->
+<!--             <p>{{ popup_error }}</p> -->
+<!--             <button class="btn" id="close-dialog">Fermer</button> -->
+<!--         </div> -->
+<!--     </dialog> -->
+<!-- {% endif %} -->
+
+{% endblock %}
+

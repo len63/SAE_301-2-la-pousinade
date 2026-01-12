@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <img src="/images/needletab.png"/>
+
+    <ul class="navbar__links">
+        <li class="navbar__links__button"><a class="{% if current_route == 'home' %}active{% endif %}" href="{{ path('home') }}">Accueil</a></li>
+        <li class="navbar__links__button"><a class="{% if current_route == 'evenements' %}active{% endif %}" href="{{ path('templates') }}">Evenements</a></li>
+        <!-- {% set isAdmin = false %} -->
+        <!-- {% for role in user.roles %} -->
+        <!--     {% if role.name == 'admin' %} -->
+        <!--         {% set isAdmin = true %} -->
+        <!--     {% endif %} -->
+        <!-- {% endfor %} -->
+        <!-- {% if isAdmin %} -->
+        <!--     <li class="navbar__links__button"><a class="{% if current_route == 'admin' %}active{% endif %}" href="{{ path('admin') }}">Administration</a></li> -->
+        <!-- {% endif %} -->
+    </ul>
+</nav>

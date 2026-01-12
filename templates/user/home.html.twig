@@ -1,0 +1,26 @@
+{% extends "user.html.twig" %}
+
+{% block title %}Needletab - Home{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/pages/home.css">
+    <link rel="stylesheet" href="/css/components/button.css">
+    <link rel="stylesheet" href="/css/components/input.css">
+    <link rel="stylesheet" href="/css/components/card.css">
+    <link rel="stylesheet" href="/css/components/badge.css">
+{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <header class="home__header">
+            <h1 class="home__header__title">Accueil</h1>
+            <h2 class="home__header__subtitle">Projet en cours</h2>
+
+            {% if user %}
+                <div class="user-info">
+                    <p>Bienvenue, <strong>{{ user.username }}</strong> ({{ user.email }})</p>
+                </div>
+            {% endif %}
+        </header>
+    </div>
+{% endblock %}

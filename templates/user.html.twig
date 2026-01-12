@@ -1,0 +1,20 @@
+{# user.html.twig #}
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Needletab{% endblock %}</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components/navbar.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<!-- {% include "/components/navbar.html.twig" %} -->
+{% block content %}{% endblock %}
+{% block javascripts %}{% endblock %}
+    <!-- <script src="/js/dark-mode.js"></script> -->
+    <!-- <script src="/js/navbar.js"></script> -->
+    <!-- <script src="/js/add-thread.js"></script> -->
+</body>
+</html>
