@@ -2,11 +2,7 @@
 $pageTitle = 'Needletab - Home';
 
 ob_start(); ?>
-    <link rel="stylesheet" href="/css/pages/home.css">
-    <link rel="stylesheet" href="/css/components/button.css">
-    <link rel="stylesheet" href="/css/components/input.css">
-    <link rel="stylesheet" href="/css/components/card.css">
-    <link rel="stylesheet" href="/css/components/badge.css">
+
 <?php $stylesheets = ob_get_clean(); ?>
 
 <?php 
