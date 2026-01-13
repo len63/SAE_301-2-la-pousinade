@@ -30,35 +30,22 @@ abstract class AbstractController
         try {
             $this->db = new Connection($dsn, $config['user'], $config['password']);
         } catch (PDOException $e) {
-            // Render the error view if connection fails
             $this->render('errors/db_error');
             die();
         }
     }
 
-    /**
-     * Renders a PHP view file.
-     * 
-     * @param string $viewPath The path to the view file inside the 'views' directory (without .php)
-     * @param array $data Associative array of variables to pass to the view
-     */
     protected function render(string $viewPath, array $data = []): void
     {
-        // Extract data keys to variables
         extract($data);
 
-        // Add current route name as a variable (replaces Twig global)
         $match = $this->router->match();
         $current_route = $match ? $match['name'] : null;
 
-        // Start output buffering
         ob_start();
         
-        // Require the view file. 
-        // Note: The view file is responsible for loading its layout (parent) if needed.
         require BASE_PATH . '/views/' . $viewPath . '.php';
         
-        // Output the buffer
         echo ob_get_clean();
     }
 }

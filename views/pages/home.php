@@ -1,17 +1,11 @@
 <?php 
 $pageTitle = 'Needletab - Home';
 
-// Define Stylesheets for this page
 ob_start(); ?>
-    <link rel="stylesheet" href="/css/pages/home.css">
-    <link rel="stylesheet" href="/css/components/button.css">
-    <link rel="stylesheet" href="/css/components/input.css">
-    <link rel="stylesheet" href="/css/components/card.css">
-    <link rel="stylesheet" href="/css/components/badge.css">
+
 <?php $stylesheets = ob_get_clean(); ?>
 
 <?php 
-// Start capturing the main content
 ob_start(); 
 ?>
     <div class="home">
@@ -28,6 +22,5 @@ ob_start();
     </div>
 <?php 
 $childContent = ob_get_clean(); 
-// Extend the User Layout
 require BASE_PATH . '/views/layouts/user.php'; 
 ?>
