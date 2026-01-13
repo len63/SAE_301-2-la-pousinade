@@ -18,6 +18,9 @@ class FrontController
 
         $this->router->map('GET', '/evenements', UserController::class . '@evenements', 'evenements');
         $this->router->map('POST', '/addEvenementToDatabase', UserController::class . '@addEvenementToDatabase', 'addEvenementToDatabase');
+
+        $this->router->map('GET', '/actualites', UserController::class . '@actualites', 'actualites');
+        $this->router->map('GET', '/contact', UserController::class . '@contact', 'contact');
     }
 
     public function handleRequest(): void

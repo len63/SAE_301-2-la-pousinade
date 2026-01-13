@@ -33,20 +33,6 @@ ob_start();
         </form>
     </div>
 
-    <?php if (isset($popup_error) || isset($message) || isset($error)): ?>
-        <dialog id="feedback-dialog" class="feedback-dialog" open>
-            <div class="dialog-content">
-                <h3 class="<?= (isset($error) || isset($popup_error)) ? 'error-title' : 'success-title' ?>">
-                    <?= (isset($error) || isset($popup_error)) ? 'Erreur' : 'Succès' ?>
-                </h3>
-                <p><?= htmlspecialchars($popup_error ?? $error ?? $message) ?></p>
-                <form method="dialog">
-                    <button class="btn" id="close-dialog">Fermer</button>
-                </form>
-            </div>
-        </dialog>
-    <?php endif; ?> 
-
 <?php 
 $childContent = ob_get_clean(); 
 require BASE_PATH . '/views/layouts/user.php'; 

@@ -13,6 +13,8 @@ class UserController extends AbstractController
         parent::__construct($router);
     }
 
+  // -- Pages:
+
     public function home(): void
     {
         $this->render('pages/home', []);
@@ -27,6 +29,25 @@ class UserController extends AbstractController
             'evenements' => $evenements
         ]);
     }
+
+    public function actualites(): void
+    {
+        /* $actualiteModel = new ActualiteModel($this->db); */
+        /* $actualites = $actualiteModel->getAllActualitess(); */
+
+        $this->render('pages/actualites', [
+            /* 'actualites' => $actualites */
+        ]);
+    }
+
+    public function contact(): void
+    {
+        $this->render('pages/contact', [
+            /* 'contact' => $contact */
+        ]);
+    }
+
+  // -- Méthodes:
 
     public function addEvenementToDatabase(): void {
         try {
