@@ -22,7 +22,7 @@
         {% else %}
             <p>Pas d'evenements</p> 
         {% endfor %}
-        <a class="btn btn-default" href="{{ path('addEvenementToDatabase') }}">{{ svg('plus') }} Ajouter un evenement</a>
+        <a class="btn btn-default" href="addEvenementToDatabase">Ajouter un evenement</a>
     </div>
 
     {% if message or error %}

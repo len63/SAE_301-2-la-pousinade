@@ -25,7 +25,7 @@ class EvenementGateway
         $tab_evenements = [];
         foreach ($result as $row)
         {
-            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
+            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['date_debut'], $row['date_fin'], $row['prix']);
         }
         return $tab_evenements;
     }
