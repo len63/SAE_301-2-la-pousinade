@@ -1,14 +1,12 @@
 <?php 
 $pageTitle = 'Poussinade - Evenements';
 
-// Define Stylesheets
 ob_start(); ?>
     <link rel="stylesheet" href="/css/pages/main.css">
     <link rel="stylesheet" href="/css/components/evenement.css">
 <?php $stylesheets = ob_get_clean(); ?>
 
 <?php 
-// Start Content
 ob_start(); 
 ?>
     <div class="evenements-container" style="display: flex; flex-wrap: wrap; gap: 1rem;">
@@ -16,7 +14,6 @@ ob_start();
             <?php foreach ($evenements as $event): ?>
                 <div class="evenement-item" style="flex: 0 1 200px;">
                     <?php 
-                    // Include component and pass $event variable to it
                     require BASE_PATH . '/views/components/evenement.php'; 
                     ?>
                 </div>
@@ -25,7 +22,6 @@ ob_start();
             <p>Pas d'evenements</p> 
         <?php endif; ?>
         
-        <!-- Corrected link for action -->
         <form action="/addEvenementToDatabase" method="POST" style="margin-top:20px; border-top:1px solid #ccc; padding-top:20px; width:100%;">
             <h3>Ajouter un évènement (Test)</h3>
             <input type="text" name="titre" placeholder="Titre" required>

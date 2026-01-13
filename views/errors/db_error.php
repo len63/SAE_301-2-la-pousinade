@@ -12,6 +12,5 @@ ob_start(); ?>
     </div>
 <?php 
 $content = ob_get_clean(); 
-// Directly extend base here as we might not want the navbar on DB error
 require BASE_PATH . '/views/layouts/base.php'; 
 ?>

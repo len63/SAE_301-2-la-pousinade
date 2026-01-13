@@ -15,9 +15,7 @@ class UserController extends AbstractController
 
     public function home(): void
     {
-        $this->render('pages/home', [
-            'user' => $_SESSION['user'] ?? null // Passing user if session exists
-        ]);
+        $this->render('pages/home', []);
     }
 
     public function evenements(): void
