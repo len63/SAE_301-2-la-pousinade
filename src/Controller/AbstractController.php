@@ -4,57 +4,61 @@ namespace Poussinade\Controller;
 
 use AltoRouter;
 use PDOException;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
-use Twig\Loader\FilesystemLoader;
-
 use Poussinade\Model\Connection;
 
 abstract class AbstractController
 {
-    protected Environment $twig;
     protected Connection $db;
     protected AltoRouter $router;
 
-    /**
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws LoaderError
-     * @throws UserFetchException
-     */
     public function __construct(AltoRouter $router)
     {
         $this->router = $router;
-        $loader = new FilesystemLoader(BASE_PATH . '/templates');
-        $this->twig = new Environment($loader);
-
-        // Add current route name as a global variable to Twig
-        $match = $this->router->match();
-        $this->twig->addGlobal('current_route', $match ? $match['name'] : null);
 
         $config = require BASE_PATH . '/config/database.php';
         
-        $dsn='mysql:host='.$config['host'].';port='.$config['port'].';dbname='.$config['dbname'];
+        // PostgreSQL DSN
+        /* $dsn = sprintf( */
+        /*     'pgsql:host=%s;port=%d;dbname=%s', */
+        /*     $config['host'], */
+        /*     $config['port'], */
+        /*     $config['dbname'] */
+        /* ); */
 
-            $this->db = new Connection($dsn, $config['user'], $config['password']);
-            
+        $dsn = 'mysql:host='.$config['host'].';port='.$config['port'].';dbname='.$config['dbname'];
+
         try {
-                        // PostgreSQL DSN
-            /* $dsn = sprintf( */
-            /*     'pgsql:host=%s;port=%d;dbname=%s', */
-            /*     $config['host'], */
-            /*     $config['port'], */
-            /*     $config['dbname'] */
-            /* ); */
-
-            // MySql DSN
-            
+            $this->db = new Connection($dsn, $config['user'], $config['password']);
         } catch (PDOException $e) {
-            throw e;
-            echo $this->twig->render('error/db_error.html.twig');
+            // Render the error view if connection fails
+            $this->render('errors/db_error');
             die();
         }
+    }
+
+    /**
+     * Renders a PHP view file.
+     * 
+     * @param string $viewPath The path to the view file inside the 'views' directory (without .php)
+     * @param array $data Associative array of variables to pass to the view
+     */
+    protected function render(string $viewPath, array $data = []): void
+    {
+        // Extract data keys to variables
+        extract($data);
+
+        // Add current route name as a variable (replaces Twig global)
+        $match = $this->router->match();
+        $current_route = $match ? $match['name'] : null;
+
+        // Start output buffering
+        ob_start();
+        
+        // Require the view file. 
+        // Note: The view file is responsible for loading its layout (parent) if needed.
+        require BASE_PATH . '/views/' . $viewPath . '.php';
+        
+        // Output the buffer
+        echo ob_get_clean();
     }
 }

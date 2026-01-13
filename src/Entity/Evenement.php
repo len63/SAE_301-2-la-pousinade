@@ -8,16 +8,14 @@ class Evenement
     public string $titre;
     public string $description;
     public float $prix;
-    public string $dateDebut;
-    public string $dateFin;
+    public string $date;
 
-    public function __construct(int $id, string $titre, string $description, string $dateDebut, string $dateFin, float $prix)
+    public function __construct(int $id, string $titre, string $description, string $date, float $prix)
     {
         $this->id = $id;
         $this->titre = $titre;
         $this->description = $description;
-        $this->dateDebut = $dateDebut;
-        $this->dateFin = $dateFin;
+        $this->date = $date;
         $this->prix = $prix;
     }
 }

@@ -5,7 +5,6 @@ namespace Poussinade\Controller;
 use AltoRouter;
 use PDOException;
 use Poussinade\Model\EvenementModel;
-use finfo;
 
 class UserController extends AbstractController
 {
@@ -16,7 +15,9 @@ class UserController extends AbstractController
 
     public function home(): void
     {
-        echo $this->twig->render('user/home.html.twig', []);
+        $this->render('pages/home', [
+            'user' => $_SESSION['user'] ?? null // Passing user if session exists
+        ]);
     }
 
     public function evenements(): void
@@ -24,46 +25,49 @@ class UserController extends AbstractController
         $evenementModel = new EvenementModel($this->db);
         $evenements = $evenementModel->getAllEvenements();
 
-        echo $this->twig->render('user/evenements.html.twig', [
+        $this->render('pages/evenements', [
             'evenements' => $evenements
         ]);
     }
 
     public function addEvenementToDatabase(): void {
         try {
-            $titre = $_POST['titre'];
-            $description = $_POST['description'];
-            $prix = $_POST['prix'];
-            $dateDebut = $_POST['dateDebut'];
-            $dateFin = $_POST['dateFin'];
+            $titre = $_POST['titre'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $prix = $_POST['prix'] ?? '';
+            $dateDebut = $_POST['dateDebut'] ?? '';
+            $dateFin = $_POST['dateFin'] ?? '';
 
             if (empty($titre) || empty($description) || empty($prix)) {
-                echo $this->twig->render('user/evenements.html.twig', [
+                $evenementModel = new EvenementModel($this->db);
+                $evenements = $evenementModel->getAllEvenements();
+                
+                $this->render('pages/evenements', [
+                    'evenements' => $evenements,
                     'popup_error' => "Données manquantes !!!"
                 ]);
-                header('Location: \evenements');
                 return;
             }
 
             $evenementModel = new EvenementModel($this->db);
 
             $rs = $evenementModel->addEvenement($titre, $description, $dateDebut, $dateFin, $prix);
+            
             if (empty($rs)) {
-                echo $this->twig->render('user/evenements.html.twig', [
+                $evenements = $evenementModel->getAllEvenements();
+                $this->render('pages/evenements', [
+                    'evenements' => $evenements,
                     'popup_error' => "Une erreur est survenue"
                 ]);
-                header('Location: \evenements');
                 return;
             }
 
-            echo $this->twig->render('user/evenements.html.twig');
-
             header("Location: /evenements");
+            exit;
         }
         catch(PDOException $e) {
-            header('/evenements');
-            return;
+            header('Location: /evenements');
+            exit;
         }
-        header('Location: /evenements');
     }
 }

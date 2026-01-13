@@ -32,7 +32,6 @@
   "require": {
     "php": ">=8.3",
     "ext-json": "*",
-    "twig/twig": "^3.21.1",
     "altorouter/altorouter": "2.0.3",
     "ext-pdo": "*",
     "ext-fileinfo": "*"
@@ -56,10 +55,7 @@
     "test": "phpunit",
     "phpstan": "phpstan analyse src --level=5",
     "cs-fix": "php-cs-fixer fix --allow-risky=yes --dry-run --diff --verbose",
-    "cs-fix-apply": "php-cs-fixer fix",
-    "cs-fix-docker-build": "docker build -f Dockerfile.csfixer -t php-cs-fixer:8.3 .",
-    "cs-fix-docker": "docker run --rm -v $PWD:/app php-cs-fixer:8.3 fix --allow-risky=yes --dry-run --diff --verbose",
-    "cs-fix-docker-apply": "docker run --rm -v $PWD:/app php-cs-fixer:8.3 fix"
+    "cs-fix-apply": "php-cs-fixer fix"
   },
   "config": {
     "sort-packages": true,

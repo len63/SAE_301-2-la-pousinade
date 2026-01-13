@@ -25,7 +25,7 @@ class EvenementGateway
         $tab_evenements = [];
         foreach ($result as $row)
         {
-            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['date_debut'], $row['date_fin'], $row['prix']);
+            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['date'], $row['prix']);
         }
         return $tab_evenements;
     }
@@ -39,19 +39,18 @@ class EvenementGateway
 
         $tab_evenements = [];
         foreach ($results as $row){
-            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['prix'], $row['date_debut'], $row['date_fin']);
+            $tab_evenements[] = new Evenement($row['id_evenement'], $row['titre'], $row['description'], $row['prix'], $row['date']);
         }
         return $tab_evenements;
     }
 
     public function insert(string $titre, string $description, string $dateDebut, string $dateFin, string $prix): bool
     {
-    $query = "INSERT INTO evenement (id_evenement, titre, prix, description, date_debut, date_fin) VALUES (:id, :titre, :prix, :description, :date_debut, :date_fin)";
+    $query = "INSERT INTO evenement (id_evenement, titre, prix, description, date_debut, date_fin) VALUES (:id, :titre, :prix, :description, :date)";
         return $this->db->executeQuery($query, [
             ':titre' => [$titre, PDO::PARAM_STR],
             ':description' => [$description, PDO::PARAM_STR],
-            ':date_debut' => [$dateDebut, PDO::PARAM_STR],
-            ':date_fin' => [$dateFin, PDO::PARAM_STR],
+            ':date' => [$dateDebut, PDO::PARAM_STR],
             ':prix' => [$prix, PDO::PARAM_INT]
         ]);
     }

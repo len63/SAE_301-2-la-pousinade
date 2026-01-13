@@ -25,6 +25,7 @@ class EvenementModel
 
     public function addEvenement(string $titre, string $description, string $dateDebut, string $dateFin, string $prix): bool
     {
-        return $this->gateway->insert(titre, description, dateDebut, dateFin, prix);
+        // Fixed: added $ signs to variables
+        return $this->gateway->insert($titre, $description, $dateDebut, $dateFin, $prix);
     }
 }
