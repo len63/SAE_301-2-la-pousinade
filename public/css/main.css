@@ -1,0 +1,16 @@
+.evenement-card {
+    margin: 10px;
+    background-color: rgba(0,0,0,0.08);
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+}
