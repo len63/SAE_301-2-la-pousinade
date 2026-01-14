@@ -4,3 +4,4 @@
 composer.phar
 /uploads/pictures/
 !uploads/default_pfp.jpg
+node_modules/

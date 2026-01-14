@@ -1,0 +1,21 @@
+{
+  "name": "pousinade-api",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Lenael BERTHELOT",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start:actualites": "node actualites-service.js",
+    "start:evenements": "node evenements-service.js",
+    "start:contact": "node contact-service.js",
+    "dev": "concurrently \"npm run start:actualites\" \"npm run start:evenements\" \"npm run start:contact\""
+  },
+  "dependencies": {
+    "mysql2": "^3.16.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
