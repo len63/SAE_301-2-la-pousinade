@@ -8,3 +8,4 @@
         <p><strong>Date :</strong> <?= htmlspecialchars($event->date) ?></p>
     </div>
 </div>
+
